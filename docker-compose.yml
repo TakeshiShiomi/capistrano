@@ -2,8 +2,10 @@ version: '3'
 services:
   db:
     image: postgres
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: root
       POSTGRES_PASSWORD: password
     # 無くても動くけど指定しておくとdocker-composeを停止してもdbの内容が永続化されるため、指定することが多いと思われる
     # https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/
@@ -12,6 +14,7 @@ services:
     # 無くても動くが指定しておくとコンテナ停止時にサービスが再起動してくれる
     # https://docs.docker.jp/v19.03/config/container/start-containers-automatically.html
     restart: always
+    user: root
   web:
     build: .
     # tmp/pids/server.pidが残ってたら `A server is already running. ~~` のエラーでrailsを起動できないので事前に消してから、`rails sever` する
