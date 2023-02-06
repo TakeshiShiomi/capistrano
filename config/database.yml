@@ -85,5 +85,6 @@ test:
 production:
   <<: *default
   database: capistrano_production
-  username: root
+  username: <%= ENV["POSTGRES_USER"] %>
   password: <%= ENV["POSTGRES_PASSWORD"] %>
+  host: shiomi-database-3.ciez0yzpyso5.ap-northeast-1.rds.amazonaws.com
